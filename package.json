@@ -1,22 +1,23 @@
 {
-    "name": "vibez-homie",
-    "version": "1.0.0",
-    "description": "The homie with the #vibez.",
-    "main": "index.js",
-    "repository": "git@github.com:hackclub/vibez-homie.git",
-    "author": "Zachary Fogg <zfogg@hackclub.com>",
-    "license": "MIT",
-    "scripts": {
-        "build": "tsc index.ts",
-        "start": "node index.js",
-        "dev": "ts-node index.ts"
-    },
-    "dependencies": {
-        "@slack/bolt": "^3.2.0"
-    },
-    "devDependencies": {
-        "@types/node": "^14.14.28",
-        "ts-node": "^9.1.1",
-        "typescript": "^4.1.5"
-    }
+  "name": "vibez-homie",
+  "version": "1.0.0",
+  "description": "The homie with the #vibez.",
+  "main": "index.js",
+  "repository": "git@github.com:hackclub/vibez-homie.git",
+  "author": "Zachary Fogg <zfogg@hackclub.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@slack/bolt": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.28",
+    "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  }
 }
