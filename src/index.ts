@@ -41,6 +41,61 @@ app.command('/vibez-channel', async ({ command, ack, say, respond }) => {
   });
 });
 
+app.command('/vibez', async ({ command, ack, say, respond }) => {
+  await ack();
+  console.log({command})
+  const vibezSep = '\n * '
+  const vibezList = command.text
+    .split(',')
+    .map(x => x.trim())
+  const vibezText = `${vibezSep}${vibezList.join(vibezSep)}`
+  console.log({vibezList, vibezText})
+
+  if (vibezList.length > 0) {
+    await respond({
+      blocks: [{
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          //text: 'You can add a button alongside text in your message. ',
+          text: `<@${command.user_name}> is feeling: ${vibezText}`,
+        },
+        accessory: {
+          type: 'button',
+          action_id: 'approve_button',
+          text: {
+            type: 'plain_text',
+            text: 'Approve?',
+            emoji: true,
+          },
+          value: 'approve_button',
+        },
+      }],
+      //text: `<@${command.user_name}> is feeling: ${vibezText}`,
+      response_type: 'ephemeral',
+      replace_original: true,
+    });
+  } else {
+    await respond({
+      text: `❗ Sorry! Please list vibez as a comma separated list. Thanks! 🚧`,
+      response_type: 'ephemeral',
+      replace_original: true,
+    });
+  }
+});
+app.shortcut('approve_button', async ({ body, ack, say, respond, shortcut, client }) => {
+  console.log({body})
+  await ack();
+  await client.views.publish()
+  await respond({
+    //text: body.value,
+    text: 'okay okay',
+    response_type: 'in_channel',
+    replace_original: true,
+  });
+});
+
+
 async function main() {
   // Start the app
   await app.start(process.env.PORT ? parseInt(process.env.PORT) : 3000);
