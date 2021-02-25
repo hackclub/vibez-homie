@@ -28,7 +28,7 @@ app.action('approve_button', async ({ body, action, ack, say, respond, client, l
   try {
     const record = {
       user_id:      command.user_id,
-      user_name:    command.user_id,
+      user_name:    command.user_name,
       channel_id:   command.channel_id,
       channel_name: command.channel_name,
       command:      command.command,
