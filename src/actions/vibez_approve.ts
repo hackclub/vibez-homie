@@ -1,36 +1,44 @@
 import app from '../server'
 import util from '../util'
+import { SlashCommand, SlackAction } from '@slack/bolt'
 
 const { airtable } = util
 
 
-type VibezAction = {
+type VibezAction = SlackAction & {
   value: string
+}
+
+type VibezActionValue = {
+  command: SlashCommand
+  //user:
 }
 
 
 app.action('approve_button', async ({ body, action, ack, say, respond, client, logger, context }) => {
   await ack()
 
-  const vibezAction: VibezAction = <any>action
-  const vibezList = util.vibezCommandToList(vibezAction.value)
+  const actionValue: VibezActionValue = JSON.parse((<VibezAction>action).value)
+  const { command } = actionValue
+  logger.info(actionValue)
+
+  const vibezList = util.vibezCommandToList(command.text)
   const vibezText = util.vibezListToText(vibezList)
 
-  // TODO: log vibez
-  console.log(body, action)
   try {
     const record = {
-      author_id: body.user.id,
-      message_id: '', // FIXME
-      vibez: JSON.stringify(vibezList),
-      links: '', // FIXME
-      radar: '', // FIXME
+      user_id:      command.user_id,
+      user_name:    command.user_id,
+      channel_id:   command.channel_id,
+      channel_name: command.channel_name,
+      command:      command.command,
+      vibez:        JSON.stringify(vibezList),
+      links:        '', // FIXME
+      radar:        '', // FIXME
     }
-    logger.info(record)
-    await airtable.create(record);
+    await airtable.create(record)
   } catch (err) {
-    console.error(err);
-    return
+    return; logger.error(err)
   }
 
   try {

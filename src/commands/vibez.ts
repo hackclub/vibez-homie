@@ -10,6 +10,7 @@ app.command('/vibez', async ({ command, ack, say, respond }) => {
   const vibezText = util.vibezListToText(vibezList)
 
   console.log({vibezList, vibezText})
+  console.log(command)
 
   if (vibezList.length > 0) {
 
@@ -36,7 +37,9 @@ app.command('/vibez', async ({ command, ack, say, respond }) => {
               {
                 type: 'button',
                 style: 'primary',
-                value: command.text,
+                value: JSON.stringify({
+                  command,
+                }),
                 action_id: 'approve_button',
                 text: {
                   type: 'plain_text',
