@@ -18,7 +18,7 @@ app.action('approve_button', async ({ body, action, ack, say, respond, client, l
   try {
     await respond({
       text: [
-        '💾 Vibez logged! 💽',
+        `💾 Vibez logged for <@${body.user.id}>! 💽`,
         vibezText,
       ].join('\n'),
       response_type: 'in_channel',
