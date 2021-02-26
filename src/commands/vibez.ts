@@ -4,12 +4,9 @@ import util from '../util'
 
 app.command('/vibez', async ({ command, ack, say, respond }) => {
   await ack()
-  console.log({command})
 
   const vibezList = util.vibezCommandToList(command.text)
   const vibezText = util.vibezListToText(vibezList)
-
-  console.log({vibezList, vibezText})
 
   if (vibezList.length > 0) {
 
