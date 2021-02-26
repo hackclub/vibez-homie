@@ -2,11 +2,13 @@ import app from '../server'
 import util from '../util'
 
 
-app.command('/vibez', async ({ command, ack, say, respond }) => {
+app.command('/vibez', async ({ command, ack, say, respond, logger }) => {
   await ack()
 
   const vibezList = util.vibezCommandToList(command.text)
   const vibezText = util.vibezListToText(vibezList)
+
+  logger.info(command)
 
   if (vibezList.length > 0) {
 
@@ -33,7 +35,9 @@ app.command('/vibez', async ({ command, ack, say, respond }) => {
               {
                 type: 'button',
                 style: 'primary',
-                value: command.text,
+                value: JSON.stringify({
+                  command,
+                }),
                 action_id: 'approve_button',
                 text: {
                   type: 'plain_text',

@@ -1,4 +1,14 @@
 // helper functions
+import AirtablePlus from 'airtable-plus'
+
+
+const airtable_conf = {
+  apiKey: process.env.AIRTABLE_API_KEY,
+  baseID: process.env.AIRTABLE_API_BASE,
+  tableName: 'messages',
+}
+
+const airtable = new AirtablePlus(airtable_conf)
 
 
 const vibezListToText = (vibezList: string[]) => {
@@ -19,5 +29,6 @@ const vibezCommandToList = (vibezText: string) => {
 
 export default {
   vibezListToText,
-  vibezCommandToList
+  vibezCommandToList,
+  airtable,
 }
