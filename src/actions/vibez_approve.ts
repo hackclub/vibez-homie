@@ -20,6 +20,7 @@ app.action('approve_button', async ({ body, action, ack, say, respond, client, l
 
   const actionValue: VibezActionValue = JSON.parse((<VibezAction>action).value)
   const { command } = actionValue
+  logger.info(actionValue)
 
   const vibezList = util.vibezCommandToList(command.text)
   const vibezText = util.vibezListToText(vibezList)
@@ -46,12 +47,12 @@ app.action('approve_button', async ({ body, action, ack, say, respond, client, l
       delete_original: true,
     })
     await respond({
-      response_type: 'in_channel',
-      replace_original: false,
       text: [
         `💾 Vibez logged for <@${body.user.id}>! 💽`,
         vibezText,
       ].join('\n'),
+      response_type: 'in_channel',
+      replace_original: false,
     })
   } catch (error) {
     logger.error('failed to update the context')

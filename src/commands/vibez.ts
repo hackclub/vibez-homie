@@ -8,7 +8,8 @@ app.command('/vibez', async ({ command, ack, say, respond, logger }) => {
   const vibezList = util.vibezCommandToList(command.text)
   const vibezText = util.vibezListToText(vibezList)
 
-  logger.info(command)
+  console.log({vibezList, vibezText})
+  console.log(command)
 
   if (vibezList.length > 0) {
 
