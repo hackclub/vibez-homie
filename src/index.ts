@@ -10,3 +10,5 @@ import './commands'
 import './actions'
 
 import main from './main'; main()
+
+export default {}

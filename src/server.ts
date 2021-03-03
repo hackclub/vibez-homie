@@ -1,6 +1,7 @@
 import { App, LogLevel, SocketModeReceiver, ExpressReceiver } from '@slack/bolt'
 import fs from 'fs'
 import util from 'util'
+import path from 'path'
 
 
 const writeFile = util.promisify(fs.writeFile)
@@ -34,7 +35,9 @@ if (ENV.NODE_ENV === 'development') {
     },
   })
 
-  const dbFileName = `${__dirname}/../.devdb.json`
+  console.log(process.cwd())
+  const __dirname = path.resolve(path.dirname(''))
+  const dbFileName = `${__dirname}/.devdb.json`
   let dbFile = '{}'
   let db: any = {installation: {team: {}}}
   try {

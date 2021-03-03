@@ -117,3 +117,5 @@ dist
 
 .devdb.json
 .envrc
+
+radars/data
