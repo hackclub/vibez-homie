@@ -12,12 +12,18 @@ app.event('member_joined_channel', async ({ event, client }) => {
   console.log('member_joined_channel', {event})
   if (!vibezChannels.includes(event.channel)) { return }
   try {
-    const result = await client.chat.postMessage({
-      channel: event.channel,
-      text: helpTxt(event.user),
-    });
     console.log(result)
+    const result = await client.chat.postEphemeral({
+      channel: event.channel,
+      user: event.user,
+      text: helpTxt(event.user),
+    })
   } catch (error) {
     console.error(error)
+    const result = await client.chat.postEphemeral({
+      channel: event.channel,
+      user: event.user,
+      text: `⚠️ something went wrong ⚠️`,
+    })
   }
 });
