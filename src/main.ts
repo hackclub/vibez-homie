@@ -7,5 +7,5 @@ export default async function main() {
     host: HOST,
     port: (PORT ? parseInt(PORT) : 3000),
   })
-  console.log(`⚡️ Bolt app is running on '${HOST}:${PORT}' in mode='${NODE_ENV}'!`)
+  console.log(`⚡️ Bolt app is running on http://${HOST}:${PORT}/ in mode='${NODE_ENV}'!`)
 }
