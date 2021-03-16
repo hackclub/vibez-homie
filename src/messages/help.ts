@@ -9,6 +9,7 @@ const vibezChannels = [
 ]
 
 app.event('member_joined_channel', async ({ event, client }) => {
+  console.log('member_joined_channel', {event})
   if (!vibezChannels.includes(event.channel)) { return }
   try {
     const result = await client.chat.postMessage({
