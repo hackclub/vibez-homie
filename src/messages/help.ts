@@ -12,11 +12,11 @@ app.event('member_joined_channel', async ({ event, client }) => {
   if (!vibezChannels.includes(event.channel)) { return }
   try {
     const result = await client.chat.postMessage({
-      channel: 'C01MEFSH34G',
+      channel: event.channel,
       text: helpTxt(event.user),
     });
-    console.log(result);
+    console.log(result)
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 });
